@@ -63,7 +63,7 @@ $route['user/(:num)']['put'] = 'UserController/update/$1';
 $route['user'] = 'UserController/store';
 
 
-$route['admin/dashboard'] = 'Dashboard';
-$route['admin/manage_users'] = 'User_';
-$route['admin/manage_roles'] = 'Role_controller';
+$route['dashboard'] = 'Dashboard';
+$route['manage_users'] = 'User_';
+$route['manage_roles'] = 'Role_controller';
 

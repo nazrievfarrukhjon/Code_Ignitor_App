@@ -18,12 +18,20 @@ class Migration_Add_users extends CI_Migration {
 				'constraint' => '100',
 			),
 			'email' => array(
-				'type' => 'TEXT',
+				'type' => 'VARCHAR',
 				'constraint' => '100',
 			),
 			'password' => array(
-				'type' => 'TEXT',
+				'type' => 'VARCHAR',
 				'constraint' => '200',
+			),
+			'level_id' => array(
+				'type' => 'INT',
+				'constraint' => 2,
+			),
+			'location' => array(
+				'type' => 'VARCHAR',
+				'constraint' => '100',
 			),
 		));
 		$this->dbforge->add_key('id', TRUE);

@@ -35,20 +35,17 @@ class UserController extends CI_Controller
 	{
 		$name = $this->input->post('name');
 		$email = $this->input->post('email');
+		$locationId = $this->input->post('location_id');
+		$levelId = $this->input->post('level_id');
 
 		$data = array(
 			'name' => $name,
-			'email' => $email
+			'email' => $email,
+			'location_id' => $locationId,
+			'level_id' => $levelId
 		);
 
 		$this->User->create($data);
-	}
-
-	public function edit($user_id): void
-	{
-		// Show form to edit an existing user
-		$data['user'] = $this->User_model->get_user($user_id);
-		$this->load->view('user/edit', $data);
 	}
 
 	public function update($userId): void
