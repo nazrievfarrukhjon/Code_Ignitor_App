@@ -54,16 +54,21 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-//
-
+//user
+$route['user']['get'] = 'UserController/index';
 $route['user/(:num)']['get'] = 'UserController/userById/$1';
 $route['user/(:num)']['put'] = 'UserController/update/$1';
+$route['user']['post'] = 'UserController/store';
+$route['user']['delete'] = 'UserController/delete';
 
 
-$route['user'] = 'UserController/store';
+//stats
+$route['stats']['get'] = 'StatsController/index';
+$route['stats/(:num)']['get'] = 'StatsController/userById/$1';
+$route['stats/(:num)']['put'] = 'StatsController/update/$1';
+$route['stats']['post'] = 'StatsController/store';
+$route['stats']['delete'] = 'StatsController/delete';
 
 
+//dashboard
 $route['dashboard'] = 'Dashboard';
-$route['manage_users'] = 'User_';
-$route['manage_roles'] = 'Role_controller';
-
