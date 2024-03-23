@@ -1,0 +1,74 @@
+version: '3'
+
+services: #containers
+
+########################### PHP ###########
+
+  php_ci:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    container_name: php_ci
+    volumes:
+      - ./:/var/www/ci
+      - ./docker/xdebug/90-xdebug.ini:/usr/local/etc/php/conf.d/90-xdebug.ini
+      - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+
+    working_dir: /var/www/ci
+    networks:
+      - ci_network
+
+########### SERVER ########################
+#
+  nginx_ci:
+    image: nginx:latest
+    container_name: nginx_ci
+    ports:
+      - "8081:80"
+    volumes:
+      - ./:/var/www/ci
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php_ci
+    networks:
+      - ci_network
+
+############################## Data Base ###########
+  mysql_ci:
+      image: mysql
+      container_name: mysql_ci
+      ports:
+          - "3306:3306"
+      environment:
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_DB=ci_db
+      restart: unless-stopped
+      volumes:
+          - ./docker/mysql/data:/var/lib/mysql
+      networks:
+          - ci_network
+      expose:
+          - 3306
+
+  ######################## COMPOSER #########
+
+  composer_ci:
+    build:
+      context: ./docker/composer
+      dockerfile: Dockerfile
+    container_name: composer_ci
+    volumes:
+      - ./:/var/www/ci
+      - ./docker/composer/cache:/root/.composer/cache
+    working_dir: /var/www/ci
+    depends_on:
+      - php_ci
+    networks:
+      - ci_network
+
+
+networks:
+  ci_network:
+    external: true
