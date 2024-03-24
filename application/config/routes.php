@@ -67,11 +67,7 @@ $route['user']['post'] = 'UserController/store';
 $route['user']['delete'] = 'UserController/delete';
 
 //stats
-$route['stats']['get'] = 'StatsController/index';
-$route['stats/(:num)']['get'] = 'StatsController/userById/$1';
-$route['stats/(:num)']['put'] = 'StatsController/update/$1';
-$route['stats']['post'] = 'StatsController/store';
-$route['stats']['delete'] = 'StatsController/delete';
+$route['stats']['get'] = 'StatsController/stats';
 
 //dashboard
 $route['dashboard'] = 'Dashboard';
