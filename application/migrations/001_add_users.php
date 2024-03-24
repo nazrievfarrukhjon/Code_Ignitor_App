@@ -29,9 +29,9 @@ class Migration_Add_users extends CI_Migration {
 				'type' => 'INT',
 				'constraint' => 2,
 			),
-			'location' => array(
-				'type' => 'VARCHAR',
-				'constraint' => '100',
+			'location_id' => array(
+				'type' => 'INT',
+				'constraint' => '2',
 			),
 		));
 		$this->dbforge->add_key('id', TRUE);

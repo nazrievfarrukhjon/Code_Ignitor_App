@@ -1365,6 +1365,11 @@ class CI_Loader {
 		{
 			$this->model($autoload['model']);
 		}
+
+		if (isset($autoload['module']))
+		{
+			$this->model($autoload['module']);
+		}
 	}
 
 	// --------------------------------------------------------------------

@@ -1,21 +1,24 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
 class UserController extends CI_Controller
 {
 
+	/**
+	 * @throws Exception
+	 */
 	public function __construct()
 	{
 		parent::__construct();
-		// Load necessary models, libraries, helpers, etc.
 		$this->load->model('User');
-		// Add any additional initialization code here
+		authenticated($this);
 	}
 
 	public function index(): void
 	{
-		$data['users'] = $this->User->all();
-		$this->load->view('user/index', $data);
+		echo json_encode(['users' => $this->User->all()]);
+
 	}
 
 	public function userById($userId): void
@@ -70,7 +73,7 @@ class UserController extends CI_Controller
 
 	}
 
-	public function delete($userId)
+	public function delete($userId): void
 	{
 		$this->User->delete($userId);
 	}

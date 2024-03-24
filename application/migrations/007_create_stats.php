@@ -24,9 +24,9 @@ class Migration_Create_stats extends CI_Migration
 				'type' => 'INT',
 				'constraint' => 3,
 			),
-			'location' => array(
-				'type' => 'VARCHAR',
-				'constraint' => 100,
+			'location_id' => array(
+				'type' => 'INT',
+				'constraint' => 2,
 			),
 		);
 

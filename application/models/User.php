@@ -7,12 +7,15 @@ class User extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
+
 		$this->load->database();
 	}
 
 	public function all()
 	{
-		return $this->db->get('users')->result();
+		return $this->db
+			->get('users')
+			->result();
 	}
 
 	public function userById(int $userId)
@@ -23,10 +26,10 @@ class User extends CI_Model
 			->row();
 	}
 
-	public function create($data)
+	public function create($data): void
 	{
 		$this->db->insert('users', $data);
-		return $this->db->insert_id();
+		$this->db->insert_id();
 	}
 
 	public function update($userId, $data): void
@@ -36,11 +39,21 @@ class User extends CI_Model
 		->update('users', $data);
 	}
 
-	public function delete($userId)
+	public function delete($userId): void
 	{
 		$this->db
 			->where('id', $userId)
 			->delete('users');
+	}
+
+	public function passwordByEmail(string $email): string
+	{
+		$user = $this->db
+			->where('email', $email)
+			->get('users')
+			->row();
+
+		return $user->password;
 	}
 
 }

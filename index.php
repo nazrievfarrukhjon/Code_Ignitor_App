@@ -36,6 +36,7 @@
  * @filesource
  */
 
+require_once __DIR__ . '/application/config/my_autoloader.php';
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
